@@ -1,0 +1,15 @@
+import { Options } from '@mikro-orm/core';
+
+const config: Options = {
+    type: 'mariadb',
+    host: 'localhost',
+    port: 3307,
+    user: '<dbUser>',
+    password: '<dbUserPassword>',
+    dbName: '<dbName>',
+    entities: ['dist/**/*.entity.js'],
+    entitiesTs: ['src/**/*.entity.ts'],
+    debug: true,
+};
+
+export default config;

@@ -1,0 +1,9 @@
+{
+    "realmName": "master",
+    "baseUrl": "http://localhost:8080/auth",
+    "grantType": "password",
+    "clientId": "admin-cli",
+    "username": "",
+    "password": "",
+    "defaultTenant": null
+}

@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  erwin-isle-db:
+    image: "mariadb"
+    restart: 'always'
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "${SQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${SQL_DATABASE}"
+      MYSQL_USER: "${SQL_USER}"
+      MYSQL_PASSWORD: "${SQL_PASSWORD}"
