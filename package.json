@@ -2,22 +2,24 @@
   "name": "erwin-isle",
   "version": "0.0.1",
   "description": "Identity Service for Learning and Education",
-  "author": "HPI Schul-Cloud Team",
+  "author": "Dataport AöR",
   "private": true,
   "license": "AGPL-3.0",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "clean": "del-cli dist",
+    "prebuild": "npm run clean",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
+    "prestart:dev": "npm run clean",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test": "npm run test:unit && npm run test:integration && npm run test:e2e",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:unit": "jest --config ./test/jest-unit.json",
+    "test:integration": "jest --config ./test/jest-integration.json",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
@@ -30,8 +32,8 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^8.0.0",
-    "@nestjs/swagger": "^5.1.5",
     "@nestjs/serve-static": "^2.2.2",
+    "@nestjs/swagger": "^5.1.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
@@ -48,9 +50,15 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^8.0.1",
+    "del-cli": "^4.0.1",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "jest": "^27.2.5",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
@@ -64,25 +72,8 @@
   "mikro-orm": {
     "useTsNode": true,
     "configPaths": [
-      "./src/mikro-orm.config.ts",
-      "./dist/mikro-orm.config.js"
+      "./src/config/mikro-orm.config.ts",
+      "./dist/config/mikro-orm.config.js"
     ]
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }

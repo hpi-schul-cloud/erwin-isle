@@ -35,6 +35,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # Project specific configuration
-src/mikro-orm.config.ts
-docker-compose.yml
-src/user-provisioning.config.json
+**/mikro-orm.config.ts
+**/docker-compose.yml
+**/user-provisioning.config.json

@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { MainModule } from './main.module';
 
-async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+async function bootstrap(): Promise<void> {
+    const app = await NestFactory.create(MainModule);
     const config = new DocumentBuilder()
         .setTitle('ErWin ISLE API')
         .setDescription('The ErWin ISLE API description.')
@@ -13,9 +13,8 @@ async function bootstrap() {
 
     SwaggerModule.setup('swagger', app, document);
 
-    // BUG: this will also set the prefix for the federal api
-    // app.setGlobalPrefix('isle');
     await app.listen(3000);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 bootstrap();

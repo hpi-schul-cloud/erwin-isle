@@ -9,7 +9,7 @@
     "^@root/(.*)$": "<rootDir>/src/$1"
   },
   "testEnvironment": "node",
-  "testRegex": ".e2e-spec.ts$",
+  "testRegex": ".unit-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },

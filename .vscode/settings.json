@@ -1,10 +1,15 @@
 {
   "editor.formatOnSave": true,
-  "editor.tabSize": 2,
   "jest.autoRun": {
     "watch": false,
     "onSave": "test-src-file",
-    "onStartup": ["all-tests"]
+    "onStartup": [
+      "all-tests"
+    ]
   },
-  "jest.debugCodeLens.showWhenTestStateIn": ["pass", "fail", "unknown"]
+  "jest.debugCodeLens.showWhenTestStateIn": [
+    "pass",
+    "fail",
+    "unknown"
+  ]
 }
