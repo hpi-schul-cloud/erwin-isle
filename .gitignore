@@ -38,3 +38,4 @@ lerna-debug.log*
 **/mikro-orm.config.ts
 **/docker-compose.yml
 **/user-provisioning.config.json
+**/educational-provisioning.config.json

@@ -37,7 +37,9 @@ npx mikro-orm schema:drop --run
 npx mikro-orm schema:create --run
 ```
 
-To configure user provisioning connection, copy `user-provisioning.config.json.example` to `user-provisioning.config.json`, and adjust the connection settings.
+To configure user provisioning connection, copy `user-provisioning.config.json.example` to `user-provisioning.config.json`. Adjust the connection settings for the KeyCloak instance.
+
+To configure educational provisioning connection, copy `educational-provisioning.config.example` to `educational-provisioning.config`. Adjust the connection settings for the Länder-API provider.
 
 ## Running the app
 

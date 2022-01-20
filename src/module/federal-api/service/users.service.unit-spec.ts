@@ -6,7 +6,7 @@ import { EducationalIdentity, EducationalSchool } from '@root/module/educational
 import { InboundIdentity } from '@root/module/inbound-identity/entity';
 import { Result } from '@root/shared/util';
 import { UsersController } from '../controller/users.controller';
-import { GetUserDto, GetUserSchoolsDto, SexDto } from '../controller/dto';
+import { UserDto, UserSchoolAssignmentDto, SexDto } from '../controller/dto';
 import { UsersService } from './users.service';
 
 const cachedDate: Date = new Date();
@@ -30,7 +30,7 @@ const inboundIdentity: InboundIdentity = {
     lastName: 'Mustermann',
     eduIdentity: educationalIdentity,
 };
-const getUserDto: GetUserDto = {
+const getUserDto: UserDto = {
     id: 'MAX.MUSTERMANN@DOMAIN.TLD',
     studentId: 'MAX.MUSTERMANN@DOMAIN.TLD',
     firstName: 'Max',
@@ -87,7 +87,7 @@ describe('UsersModule', () => {
             it('should return user data', async () => {
                 const result = await service.getUser(userId);
 
-                expect(result).toStrictEqual<Result<GetUserDto>>({
+                expect(result).toStrictEqual<Result<UserDto>>({
                     success: true,
                     value: getUserDto,
                 });
@@ -98,7 +98,7 @@ describe('UsersModule', () => {
             it('should return user schools', async () => {
                 const result = await service.getUserSchools(userId);
 
-                expect(result).toStrictEqual<Result<Array<GetUserSchoolsDto>>>({
+                expect(result).toStrictEqual<Result<Array<UserSchoolAssignmentDto>>>({
                     success: true,
                     value: [],
                 });

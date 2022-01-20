@@ -16,6 +16,9 @@ export class EducationalIdentity {
     @PrimaryKey()
     public id!: number;
 
+    @Property({ nullable: true })
+    originId?: string;
+
     @Property()
     public preferredName!: string;
 
@@ -29,7 +32,7 @@ export class EducationalIdentity {
     public lastName?: string;
 
     @Property({ nullable: true })
-    public dateOfBirth? = new Date();
+    public dateOfBirth?: Date;
 
     @Enum({ items: () => SexDto, nullable: true })
     public sex?: SexDto;
@@ -42,5 +45,5 @@ export class EducationalIdentity {
     public inboundIdentities = new Collection<InboundIdentity>(this);
 
     @ManyToMany(() => EducationalSchool, (school) => school.users)
-    public schools?: Collection<EducationalSchool>;
+    public schools = new Collection<EducationalSchool>(this);
 }

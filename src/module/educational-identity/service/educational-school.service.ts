@@ -15,7 +15,8 @@ export class EducationalSchoolService {
 
     public async create(dto: CreateEducationalSchoolDto): Promise<Result<EducationalSchool>> {
         const eS = new EducationalSchool();
-        eS.schoolId = dto.schoolId;
+        eS.originId = dto.originId;
+        eS.schoolNumber = dto.schoolNumber;
         eS.displayName = dto.displayName;
         const res = await unwrapIntoResult(this.educationalSchoolRepository.persistAndFlush(eS));
         if (res.success) {
@@ -51,10 +52,10 @@ export class EducationalSchoolService {
         return res;
     }
 
-    public async findBySchoolId(schoolId: string): Promise<Result<EducationalSchool>> {
+    public async findByOriginId(originId: string): Promise<Result<EducationalSchool>> {
         return unwrapIntoResult(
             this.educationalSchoolRepository.findOneOrFail({
-                schoolId,
+                originId: originId,
             }),
         );
     }

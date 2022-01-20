@@ -7,12 +7,15 @@ export class EducationalSchool {
     @PrimaryKey()
     public id!: number;
 
-    @Property()
-    public schoolId!: string;
+    @Property({ nullable: true })
+    originId?: string;
+
+    @Property({ nullable: true })
+    schoolNumber?: string;
 
     @Property()
     public displayName!: string;
 
     @ManyToMany(() => EducationalIdentity, 'schools', { owner: true })
-    public users?: Collection<EducationalIdentity>;
+    public users = new Collection<EducationalIdentity>(this);
 }

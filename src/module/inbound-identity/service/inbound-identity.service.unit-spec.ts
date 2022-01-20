@@ -1,39 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EntityRepository, MikroORM } from '@mikro-orm/core';
-import { getRepositoryToken, MikroOrmModule } from '@mikro-orm/nestjs';
-import config from '@root/config/mikro-orm.config';
+import { EntityRepository } from '@mikro-orm/core';
+import { getRepositoryToken } from '@mikro-orm/nestjs';
 import { EducationalIdentity, EducationalSchool } from '@root/module/educational-identity/entity';
 import { InboundIdentity } from '@root/module/inbound-identity/entity';
 import { EducationalIdentityService } from '@root/module/educational-identity';
 import { Result } from '@root/shared/util';
 import { InboundIdentityService } from './inbound-identity.service';
-
-describe('InboundIdentityService ORM', () => {
-    let service: InboundIdentityService;
-    let orm: MikroORM;
-
-    beforeEach(async () => {
-        config.tsNode = true;
-        const testingModule: TestingModule = await Test.createTestingModule({
-            imports: [
-                MikroOrmModule.forRoot(config),
-                MikroOrmModule.forFeature({
-                    entities: [InboundIdentity, EducationalIdentity, EducationalSchool],
-                }),
-            ],
-            providers: [InboundIdentityService, EducationalIdentityService],
-        }).compile();
-
-        service = testingModule.get<InboundIdentityService>(InboundIdentityService);
-        orm = testingModule.get<MikroORM>(MikroORM);
-    });
-
-    afterAll(async () => orm.close(true));
-
-    it('should be defined', () => {
-        expect(service).toBeDefined();
-    });
-});
 
 const testInboundIdentity1 = new InboundIdentity();
 const testInboundIdentity2 = new InboundIdentity();
@@ -133,12 +105,12 @@ describe('InboundIdentityService db mock', () => {
 
     describe('update', () => {
         it('should return the update inbound identity', async () => {
-            const ret = await service.update(1, { inboundId: '1000' });
-
-            expect(ret).toStrictEqual<Result<InboundIdentity>>({
-                success: true,
-                value: testInboundIdentity1,
-            });
+            const newInId = '9999';
+            const ret = await service.update(1, { inboundId: newInId });
+            expect(ret.success).toBe(true);
+            if (ret.success) {
+                expect(ret.value.inboundId).toBe(newInId);
+            }
         });
     });
 

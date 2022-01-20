@@ -47,6 +47,21 @@ export class KeycloakProvisioningSourceUc implements UserProvisionSourceUc {
         return foundUsers.map((user: UserRepresentation) => this.extractUserDto(user));
     }
 
+    async importOne(userId: string, tenant?: string | undefined): Promise<UserDto | null> {
+        await this.kcAdminClient.auth(this.kcCredentials);
+        const foundUser = tenant
+            ? await this.kcAdminClient.users.findOne({ id: userId, realm: tenant })
+            : this.kcSettings.sourceRealm
+            ? await this.kcAdminClient.users.findOne({ id: userId, realm: this.kcSettings.sourceRealm })
+            : await this.kcAdminClient.users.findOne({ id: userId });
+
+        if (foundUser) {
+            return this.extractUserDto(foundUser);
+        } else {
+            return null;
+        }
+    }
+
     private extractUserDto(user: UserRepresentation): UserDto {
         return {
             id: user.id as string,

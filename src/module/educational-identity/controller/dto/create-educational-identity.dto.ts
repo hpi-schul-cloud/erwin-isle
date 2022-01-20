@@ -1,5 +1,7 @@
 export class CreateEducationalIdentityDto {
-    public readonly studentId?: number;
+    public readonly originId?: string;
+
+    public readonly studentId?: string;
 
     public readonly firstName?: string;
 

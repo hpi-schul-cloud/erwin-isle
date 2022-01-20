@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Result } from '@root/shared/util';
 import { EducationalIdentityService } from '@root/module/educational-identity';
-import { GetUserDto, GetUserSchoolsDto, SexDto } from '../controller/dto';
+import { UserDto, UserSchoolAssignmentDto, SexDto } from '../controller/dto';
 
 @Injectable()
 export class UsersService {
     public constructor(private readonly service: EducationalIdentityService) {}
 
     // TODO: add optional properties for GetUserDto
-    public async getUser(id: string): Promise<Result<GetUserDto>> {
+    public async getUser(id: string): Promise<Result<UserDto>> {
         const userResult = await this.service.findOneByInboundId(id);
 
         if (userResult.success) {
@@ -28,8 +28,13 @@ export class UsersService {
                           dateOfBirth: userResult.value.dateOfBirth as Date,
                           schools: schoolsResult.value.map((school) => {
                               return {
-                                  id: school.schoolId,
-                                  displayName: school.displayName,
+                                  school: {
+                                      id: school.displayName,
+                                      displayName: school.displayName,
+                                  },
+                                  role: 'student',
+                                  start: new Date(),
+                                  end: new Date(),
                               };
                           }),
                       },
@@ -41,7 +46,7 @@ export class UsersService {
     }
 
     // TODO: role, start and end date are hardcoded values
-    public async getUserSchools(id: string): Promise<Result<Array<GetUserSchoolsDto>>> {
+    public async getUserSchools(id: string): Promise<Result<Array<UserSchoolAssignmentDto>>> {
         const userResult = await this.service.findOneByInboundId(id);
 
         if (userResult.success) {
@@ -54,7 +59,7 @@ export class UsersService {
                       value: schoolsResult.value.map((school) => {
                           return {
                               school: {
-                                  id: school.schoolId,
+                                  id: school.id.toString(),
                                   displayName: school.displayName,
                               },
                               role: 'student',

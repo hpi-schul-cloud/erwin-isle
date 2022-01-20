@@ -1,4 +1,3 @@
-import { wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { EntityRepository } from '@mikro-orm/mariadb';
 import { Injectable } from '@nestjs/common';
@@ -68,9 +67,9 @@ export class InboundIdentityService {
         id: number,
         updateInboundIdentityDto: UpdateInboundIdentityDto,
     ): Promise<Result<InboundIdentity>> {
-        const inboundIdentity = await this.inboundIdentityRepository.findOneOrFail(id);
-
-        wrap(inboundIdentity).assign(updateInboundIdentityDto);
+        let inboundIdentity = await this.inboundIdentityRepository.findOneOrFail(id);
+        inboundIdentity = { ...inboundIdentity, ...updateInboundIdentityDto };
+        await this.inboundIdentityRepository.persistAndFlush(inboundIdentity);
 
         return { success: true, value: inboundIdentity };
     }

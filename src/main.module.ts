@@ -5,6 +5,7 @@ import { join } from 'path';
 import { EducationalIdentityModule } from './module/educational-identity/educational-identity.module';
 import { InboundIdentityModule } from './module/inbound-identity/inbound-identity.module';
 import { UserProvisioningModule } from './module/user-provisioning/user-provisioning.module';
+import { EducationalProvisioningModule } from './module/educational-provisioning/educational-provisioning.module';
 import { FederalApiModule } from './module/federal-api';
 
 @Module({
@@ -13,6 +14,7 @@ import { FederalApiModule } from './module/federal-api';
         EducationalIdentityModule,
         InboundIdentityModule,
         UserProvisioningModule,
+        EducationalProvisioningModule,
         FederalApiModule,
         ServeStaticModule.forRoot({
             rootPath: join(__dirname, '..', 'client'),

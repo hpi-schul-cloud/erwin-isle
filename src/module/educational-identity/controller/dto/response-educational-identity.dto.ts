@@ -11,7 +11,7 @@ export class ResponseEducationalIdentityDto {
 
     public readonly lastName?: string;
 
-    public readonly dateOfBirth? = new Date();
+    public readonly dateOfBirth?: Date;
 
     public readonly educationalDetails!: {
         schools: Array<string> | undefined;

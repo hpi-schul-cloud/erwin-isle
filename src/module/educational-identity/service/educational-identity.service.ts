@@ -22,10 +22,14 @@ export class EducationalIdentityService {
     public async create(dto: CreateEducationalIdentityDto): Promise<Result<EducationalIdentity>> {
         const eId = new EducationalIdentity();
 
+        eId.originId = dto.originId;
+        eId.preferredName = dto.preferredName;
+        eId.studentId = dto.studentId;
         eId.firstName = dto.firstName;
         eId.lastName = dto.lastName;
-        eId.preferredName = dto.preferredName;
-        eId.dateOfBirth = dto.dateOfBirth;
+        if (dto.dateOfBirth) {
+            eId.dateOfBirth = new Date(dto.dateOfBirth);
+        }
 
         await this.educationalIdentityRepository.persistAndFlush(eId);
 
@@ -95,6 +99,23 @@ export class EducationalIdentityService {
                 { id },
                 {
                     populate: details ? ['schools'] : [],
+                    failHandler: () => {
+                        return new UserNotFoundException();
+                    },
+                },
+            );
+
+            return { success: true, value: result };
+        } catch (error) {
+            return { success: false, error: error as Error };
+        }
+    }
+
+    public async findOneByOriginId(id: string): Promise<Result<EducationalIdentity>> {
+        try {
+            const result = await this.educationalIdentityRepository.findOneOrFail(
+                { originId: id },
+                {
                     failHandler: () => {
                         return new UserNotFoundException();
                     },

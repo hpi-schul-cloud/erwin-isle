@@ -51,7 +51,7 @@ export class EducationalSchoolController {
     private extractResponse(eS: EducationalSchool): ResponseEducationalSchoolDto {
         return {
             id: eS.id,
-            schoolId: eS.schoolId,
+            schoolNumber: eS.schoolNumber,
             displayName: eS.displayName,
         };
     }
