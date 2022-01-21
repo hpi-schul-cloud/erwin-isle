@@ -17,7 +17,7 @@ export class EducationalIdentity {
     public id!: number;
 
     @Property({ nullable: true })
-    originId?: string;
+    public originId?: string;
 
     @Property()
     public preferredName!: string;

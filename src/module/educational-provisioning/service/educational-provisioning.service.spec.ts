@@ -67,12 +67,12 @@ const mockDbConfig: Options = {
 describe('EducationalProvisioningService', () => {
     let service: EducationalProvisioningService;
     let serviceEduIdent: EducationalIdentityService;
-    //let serviceEduSchool: EducationalSchoolService;
+    // let serviceEduSchool: EducationalSchoolService;
 
     let orm: MikroORM;
 
     beforeEach(async () => {
-        const module: TestingModule = await Test.createTestingModule({
+        const testingModule: TestingModule = await Test.createTestingModule({
             imports: [
                 MikroOrmModule.forRoot(mockDbConfig),
                 MikroOrmModule.forFeature({ entities: [InboundIdentity, EducationalIdentity, EducationalSchool] }),
@@ -91,10 +91,10 @@ describe('EducationalProvisioningService', () => {
             ],
         }).compile();
 
-        service = module.get<EducationalProvisioningService>(EducationalProvisioningService);
-        serviceEduIdent = module.get<EducationalIdentityService>(EducationalIdentityService);
-        //serviceEduSchool = module.get<EducationalSchoolService>(EducationalSchoolService);
-        orm = module.get<MikroORM>(MikroORM);
+        service = testingModule.get<EducationalProvisioningService>(EducationalProvisioningService);
+        serviceEduIdent = testingModule.get<EducationalIdentityService>(EducationalIdentityService);
+        // serviceEduSchool = module.get<EducationalSchoolService>(EducationalSchoolService);
+        orm = testingModule.get<MikroORM>(MikroORM);
 
         const generator = orm.getSchemaGenerator();
 
@@ -104,11 +104,11 @@ describe('EducationalProvisioningService', () => {
     });
 
     afterAll(async () => {
-        //await orm.close(true);
-        //return done;
+        // await orm.close(true);
+        // return done;
     });
 
-    it('should be defined', async () => {
+    it('should be defined', () => {
         expect(service).toBeDefined();
     });
 

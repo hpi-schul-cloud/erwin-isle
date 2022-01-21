@@ -55,7 +55,7 @@ export class EducationalSchoolService {
     public async findByOriginId(originId: string): Promise<Result<EducationalSchool>> {
         return unwrapIntoResult(
             this.educationalSchoolRepository.findOneOrFail({
-                originId: originId,
+                originId,
             }),
         );
     }

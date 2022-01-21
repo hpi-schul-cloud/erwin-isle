@@ -1,4 +1,4 @@
-import { UserSchoolAssignmentDto } from '.';
+import { UserSchoolAssignmentDto } from './user-school-assignment.dto';
 import { ClassDto } from './class.dto';
 import { GuardianDto } from './guardian.dto';
 import { SexDto } from './sex.dto';

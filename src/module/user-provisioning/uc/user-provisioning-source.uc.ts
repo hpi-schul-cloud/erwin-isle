@@ -16,5 +16,5 @@ export interface UserProvisionSourceUc {
      * @param [tenant] specifiy users origin
      * @returns the user from the provisiong source (might be null)
      */
-    importOne(userId: string, tenant?: string | undefined): Promise<UserDto | null >;
+    importOne(userId: string, tenant?: string | undefined): Promise<UserDto | null>;
 }

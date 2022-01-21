@@ -8,10 +8,10 @@ export class EducationalSchool {
     public id!: number;
 
     @Property({ nullable: true })
-    originId?: string;
+    public originId?: string;
 
     @Property({ nullable: true })
-    schoolNumber?: string;
+    public schoolNumber?: string;
 
     @Property()
     public displayName!: string;

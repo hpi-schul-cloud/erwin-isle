@@ -6,13 +6,13 @@ import { FederalApiProvisioningSource } from '../uc/federal-api-provisioning-sou
 
 @Injectable()
 export class EducationalProvisioningService {
-    constructor(
+    public constructor(
         private readonly federalApiService: FederalApiProvisioningSource,
         private readonly educationalIdentityService: EducationalIdentityService,
         private readonly educationalSchoolService: EducationalSchoolService,
     ) {}
 
-    async import(): Promise<boolean> {
+    public async import(): Promise<boolean> {
         // find users
         const userResponse = await this.federalApiService.getUsers();
 
@@ -25,6 +25,7 @@ export class EducationalProvisioningService {
         const schoolMap = new Map<string, number>();
         // await Promise.all(
         // allSchools.map(async (school) => {
+        // TODO refactoring refactoring and transaction management
         for (const school of allSchools) {
             const existingSchool = await this.educationalSchoolService.findByOriginId(school.id);
             if (existingSchool.success) {
@@ -43,6 +44,7 @@ export class EducationalProvisioningService {
         // create users and add schools
         // await Promise.all(
         //     userResponse.map(async (user) => {
+        // TODO refactoring and transaction management
         for (const user of userResponse) {
             const existingEduId = await this.educationalIdentityService.findOneByOriginId(user.id);
             if (existingEduId.success) {

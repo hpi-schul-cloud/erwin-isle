@@ -14,7 +14,7 @@ describe('AppController (e2e)', () => {
         await app.init();
     });
 
-    it('dummy test', () => {
+    it('dummy e2e test', () => {
         // return request(app.getHttpServer()).get('/').expect(404);
 
         expect(true).toBeTruthy();
