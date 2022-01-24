@@ -1,3 +1,5 @@
+// TODO refactor the data access layer to solve the awaits in the loop
+/* eslint-disable no-await-in-loop */
 import { Injectable } from '@nestjs/common';
 import { CreateEducationalIdentityDto } from '@root/module/educational-identity/controller/dto';
 import { UserDto } from '@root/module/federal-api/controller/dto';
